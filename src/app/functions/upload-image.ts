@@ -32,8 +32,6 @@ export async function uploadImage(
     contentStream,
   })
 
-  // TODO: carregar a imagem p/ o Cloudflare R2
-
   await db.insert(schema.uploads).values({
     name: fileName,
     remoteKey: key,

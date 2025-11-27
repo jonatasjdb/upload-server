@@ -10,7 +10,10 @@
     "test:watch": "dotenv -e .env.test -- vitest",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "db:migrate:test": "dotenv -e .env.test -- drizzle-kit migrate",
+    "pretest": "pnpm run db:migrate:test",
+    "pretest:watch": "pnpm run db:migrate:test"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +22,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.3.4",
     "@types/node": "^24.10.0",
+    "dotenv-cli": "^11.0.0",
     "drizzle-kit": "^0.31.7",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
