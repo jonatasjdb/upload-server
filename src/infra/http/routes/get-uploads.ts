@@ -1,7 +1,7 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import z from 'zod'
 import { getUploads } from '@/app/functions/get-uploads'
-import { isRight, unwrapEither } from '@/infra/shared/either'
+import { unwrapEither } from '@/infra/shared/either'
 
 export const getUploadsRoute: FastifyPluginAsyncZod = async server => {
   server.get(
@@ -34,7 +34,15 @@ export const getUploadsRoute: FastifyPluginAsyncZod = async server => {
       },
     },
     async (request, reply) => {
-      const result = await getUploads({})
+      const { page, pageSize, searchQuery, sortBy, sortDirection } =
+        request.query
+      const result = await getUploads({
+        page,
+        pageSize,
+        searchQuery,
+        sortBy,
+        sortDirection,
+      })
 
       const { total, uploads } = unwrapEither(result)
 
